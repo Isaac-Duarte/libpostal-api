@@ -1,7 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Button } from "./ui/button";
+import { Copy, CheckCircle } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import {
   vscDarkPlus,
@@ -11,6 +14,8 @@ import { useTheme } from "~/contexts/ThemeContext";
 
 export function DocumentationSection() {
   const { theme } = useTheme();
+  const [parseCurlCopied, setParseCurlCopied] = useState(false);
+  const [normalizeCurlCopied, setNormalizeCurlCopied] = useState(false);
   const parseRequestExample = {
     address: "123 Main St, New York, NY 10001",
     language: "en",
@@ -72,6 +77,26 @@ export function DocumentationSection() {
     "level": "medium"
   }'`;
 
+  const copyParseCurl = async () => {
+    try {
+      await navigator.clipboard.writeText(parseCurlExample);
+      setParseCurlCopied(true);
+      setTimeout(() => setParseCurlCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
+
+  const copyNormalizeCurl = async () => {
+    try {
+      await navigator.clipboard.writeText(normalizeCurlExample);
+      setNormalizeCurlCopied(true);
+      setTimeout(() => setNormalizeCurlCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
+
   return (
     <section id="docs" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -129,9 +154,24 @@ export function DocumentationSection() {
                 </div>
 
                 <div>
-                  <h4 className="font-medium mb-2 text-foreground">
-                    cURL Example:
-                  </h4>
+                  <div className="flex justify-between items-center mb-2">
+                    <h4 className="font-medium text-foreground">
+                      cURL Example:
+                    </h4>
+                    <Button variant="outline" size="sm" onClick={copyParseCurl}>
+                      {parseCurlCopied ? (
+                        <>
+                          <CheckCircle className="mr-2 h-3 w-3" />
+                          Copied!
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="mr-2 h-3 w-3" />
+                          Copy
+                        </>
+                      )}
+                    </Button>
+                  </div>
                   <div className="bg-muted border border-border rounded-lg overflow-hidden">
                     <SyntaxHighlighter
                       language="bash"
@@ -209,9 +249,24 @@ export function DocumentationSection() {
                 </div>
 
                 <div>
-                  <h4 className="font-medium mb-2 text-foreground">
-                    cURL Example:
-                  </h4>
+                  <div className="flex justify-between items-center mb-2">
+                    <h4 className="font-medium text-foreground">
+                      cURL Example:
+                    </h4>
+                    <Button variant="outline" size="sm" onClick={copyNormalizeCurl}>
+                      {normalizeCurlCopied ? (
+                        <>
+                          <CheckCircle className="mr-2 h-3 w-3" />
+                          Copied!
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="mr-2 h-3 w-3" />
+                          Copy
+                        </>
+                      )}
+                    </Button>
+                  </div>
                   <div className="bg-muted border border-border rounded-lg overflow-hidden">
                     <SyntaxHighlighter
                       language="bash"

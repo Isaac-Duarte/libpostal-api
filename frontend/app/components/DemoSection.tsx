@@ -51,6 +51,7 @@ export function DemoSection() {
     data: { message: "Click 'Parse Address' to see the response" },
   });
   const [copied, setCopied] = useState(false);
+  const [curlCopied, setCurlCopied] = useState(false);
 
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
 
@@ -119,6 +120,36 @@ export function DemoSection() {
       await navigator.clipboard.writeText(responseText);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
+
+  const copyCurlCommand = async () => {
+    if (!address.trim()) {
+      return;
+    }
+
+    let requestBody: any = { address };
+    let endpoint = "";
+
+    if (mode === "parse") {
+      if (language) requestBody.language = language;
+      if (country) requestBody.country = country;
+      endpoint = `${baseUrl}/api/v1/parse`;
+    } else {
+      requestBody.level = level;
+      endpoint = `${baseUrl}/api/v1/normalize`;
+    }
+
+    const curlCommand = `curl -X POST ${endpoint} \\
+  -H "Content-Type: application/json" \\
+  -d '${JSON.stringify(requestBody, null, 2)}'`;
+
+    try {
+      await navigator.clipboard.writeText(curlCommand);
+      setCurlCopied(true);
+      setTimeout(() => setCurlCopied(false), 2000);
     } catch (err) {
       console.error("Failed to copy: ", err);
     }
@@ -265,20 +296,40 @@ export function DemoSection() {
                   </TabsContent>
                 </Tabs>
 
-                <Button
-                  onClick={processRequest}
-                  disabled={loading}
-                  className="w-full"
-                >
-                  {loading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Processing...
-                    </>
-                  ) : (
-                    `${mode === "parse" ? "Parse" : "Normalize"} Address`
-                  )}
-                </Button>
+                <div className="flex gap-2">
+                  <Button
+                    onClick={processRequest}
+                    disabled={loading}
+                    className="flex-1"
+                  >
+                    {loading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Processing...
+                      </>
+                    ) : (
+                      `${mode === "parse" ? "Parse" : "Normalize"} Address`
+                    )}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={copyCurlCommand}
+                    disabled={!address.trim()}
+                    className="flex-shrink-0"
+                  >
+                    {curlCopied ? (
+                      <>
+                        <CheckCircle className="mr-2 h-4 w-4" />
+                        Copied!
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="mr-2 h-4 w-4" />
+                        Copy cURL
+                      </>
+                    )}
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </motion.div>
