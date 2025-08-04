@@ -2,14 +2,19 @@
 
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import {
+  vscDarkPlus,
+  vs,
+} from "react-syntax-highlighter/dist/esm/styles/prism";
+import { useTheme } from "~/contexts/ThemeContext";
 
 export function DocumentationSection() {
+  const { theme } = useTheme();
   const parseRequestExample = {
     address: "123 Main St, New York, NY 10001",
     language: "en",
-    country: "US"
+    country: "US",
   };
 
   const parseResponseExample = {
@@ -21,38 +26,35 @@ export function DocumentationSection() {
         road: "Main St",
         city: "New York",
         state: "NY",
-        postcode: "10001"
-      }
+        postcode: "10001",
+      },
     },
     meta: {
       processing_time_ms: 15,
       request_id: "req-123",
       api_version: "1.0",
-      timestamp: "2025-01-01T00:00:00Z"
-    }
+      timestamp: "2025-01-01T00:00:00Z",
+    },
   };
 
   const normalizeRequestExample = {
     address: "123 Main St",
-    level: "medium"
+    level: "medium",
   };
 
   const normalizeResponseExample = {
     success: true,
     data: {
       original: "123 Main St",
-      expansions: [
-        "123 main street",
-        "123 main st"
-      ],
-      expansion_count: 2
+      expansions: ["123 main street", "123 main st"],
+      expansion_count: 2,
     },
     meta: {
       processing_time_ms: 8,
       request_id: "req-124",
       api_version: "1.0",
-      timestamp: "2025-01-01T00:00:00Z"
-    }
+      timestamp: "2025-01-01T00:00:00Z",
+    },
   };
 
   const parseCurlExample = `curl -X POST https://libpostal.pendejo.dev/api/v1/parse \\
@@ -71,19 +73,19 @@ export function DocumentationSection() {
   }'`;
 
   return (
-    <section id="docs" className="py-20 bg-gray-900">
+    <section id="docs" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
+        <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             API Documentation
           </h2>
-          <p className="text-lg text-gray-400">
+          <p className="text-lg text-muted-foreground">
             Simple REST API endpoints for address processing
           </p>
         </motion.div>
@@ -96,27 +98,29 @@ export function DocumentationSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <Card className="bg-gray-800 border-gray-600 hover:shadow-xl hover:shadow-blue-600/20 transition-all duration-300">
+            <Card className="bg-card border-border hover:shadow-xl hover:shadow-primary/20 transition-all duration-300">
               <CardHeader>
-                <CardTitle className="text-xl text-green-400">
-                  POST /api/v1/parse
+                <CardTitle className="text-xl text-foreground">
+                  POST /parse
                 </CardTitle>
-                <p className="text-gray-400">
-                  Parse an address into structured components
+                <p className="text-muted-foreground">
+                  Parse addresses into their component parts
                 </p>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-4">
                 <div>
-                  <h4 className="font-medium mb-2 text-white">Request Body:</h4>
-                  <div className="bg-gray-950 border border-gray-600 rounded-lg overflow-hidden">
+                  <h4 className="font-semibold text-foreground mb-2">
+                    Request
+                  </h4>
+                  <div className="bg-muted border border-border rounded-lg overflow-hidden">
                     <SyntaxHighlighter
                       language="json"
-                      style={vscDarkPlus}
+                      style={theme === "dark" ? vscDarkPlus : vs}
                       customStyle={{
                         margin: 0,
-                        padding: '1rem',
-                        background: 'transparent',
-                        fontSize: '0.875rem'
+                        padding: "1rem",
+                        background: "transparent",
+                        fontSize: "0.875rem",
                       }}
                     >
                       {JSON.stringify(parseRequestExample, null, 2)}
@@ -125,16 +129,18 @@ export function DocumentationSection() {
                 </div>
 
                 <div>
-                  <h4 className="font-medium mb-2 text-white">cURL Example:</h4>
-                  <div className="bg-gray-950 border border-gray-600 rounded-lg overflow-hidden">
+                  <h4 className="font-medium mb-2 text-foreground">
+                    cURL Example:
+                  </h4>
+                  <div className="bg-muted border border-border rounded-lg overflow-hidden">
                     <SyntaxHighlighter
                       language="bash"
-                      style={vscDarkPlus}
+                      style={theme === "dark" ? vscDarkPlus : vs}
                       customStyle={{
                         margin: 0,
-                        padding: '1rem',
-                        background: 'transparent',
-                        fontSize: '0.875rem'
+                        padding: "1rem",
+                        background: "transparent",
+                        fontSize: "0.875rem",
                       }}
                     >
                       {parseCurlExample}
@@ -143,16 +149,18 @@ export function DocumentationSection() {
                 </div>
 
                 <div>
-                  <h4 className="font-medium mb-2 text-white">Response:</h4>
-                  <div className="bg-gray-950 border border-gray-600 rounded-lg overflow-hidden">
+                  <h4 className="font-medium mb-2 text-foreground">
+                    Response:
+                  </h4>
+                  <div className="bg-muted border border-border rounded-lg overflow-hidden">
                     <SyntaxHighlighter
                       language="json"
-                      style={vscDarkPlus}
+                      style={theme === "dark" ? vscDarkPlus : vs}
                       customStyle={{
                         margin: 0,
-                        padding: '1rem',
-                        background: 'transparent',
-                        fontSize: '0.875rem'
+                        padding: "1rem",
+                        background: "transparent",
+                        fontSize: "0.875rem",
                       }}
                     >
                       {JSON.stringify(parseResponseExample, null, 2)}
@@ -170,27 +178,29 @@ export function DocumentationSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <Card className="bg-gray-800 border-gray-600 hover:shadow-xl hover:shadow-blue-600/20 transition-all duration-300">
+            <Card className="bg-card border-border hover:shadow-xl hover:shadow-primary/20 transition-all duration-300">
               <CardHeader>
-                <CardTitle className="text-xl text-blue-400">
+                <CardTitle className="text-xl text-foreground">
                   POST /api/v1/normalize
                 </CardTitle>
-                <p className="text-gray-400">
+                <p className="text-muted-foreground">
                   Normalize and expand address abbreviations
                 </p>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div>
-                  <h4 className="font-medium mb-2 text-white">Request Body:</h4>
-                  <div className="bg-gray-950 border border-gray-600 rounded-lg overflow-hidden">
+                  <h4 className="font-medium mb-2 text-foreground">
+                    Request Body:
+                  </h4>
+                  <div className="bg-muted border border-border rounded-lg overflow-hidden">
                     <SyntaxHighlighter
                       language="json"
-                      style={vscDarkPlus}
+                      style={theme === "dark" ? vscDarkPlus : vs}
                       customStyle={{
                         margin: 0,
-                        padding: '1rem',
-                        background: 'transparent',
-                        fontSize: '0.875rem'
+                        padding: "1rem",
+                        background: "transparent",
+                        fontSize: "0.875rem",
                       }}
                     >
                       {JSON.stringify(normalizeRequestExample, null, 2)}
@@ -199,16 +209,18 @@ export function DocumentationSection() {
                 </div>
 
                 <div>
-                  <h4 className="font-medium mb-2 text-white">cURL Example:</h4>
-                  <div className="bg-gray-950 border border-gray-600 rounded-lg overflow-hidden">
+                  <h4 className="font-medium mb-2 text-foreground">
+                    cURL Example:
+                  </h4>
+                  <div className="bg-muted border border-border rounded-lg overflow-hidden">
                     <SyntaxHighlighter
                       language="bash"
-                      style={vscDarkPlus}
+                      style={theme === "dark" ? vscDarkPlus : vs}
                       customStyle={{
                         margin: 0,
-                        padding: '1rem',
-                        background: 'transparent',
-                        fontSize: '0.875rem'
+                        padding: "1rem",
+                        background: "transparent",
+                        fontSize: "0.875rem",
                       }}
                     >
                       {normalizeCurlExample}
@@ -217,16 +229,18 @@ export function DocumentationSection() {
                 </div>
 
                 <div>
-                  <h4 className="font-medium mb-2 text-white">Response:</h4>
-                  <div className="bg-gray-950 border border-gray-600 rounded-lg overflow-hidden">
+                  <h4 className="font-medium mb-2 text-foreground">
+                    Response:
+                  </h4>
+                  <div className="bg-muted border border-border rounded-lg overflow-hidden">
                     <SyntaxHighlighter
                       language="json"
-                      style={vscDarkPlus}
+                      style={theme === "dark" ? vscDarkPlus : vs}
                       customStyle={{
                         margin: 0,
-                        padding: '1rem',
-                        background: 'transparent',
-                        fontSize: '0.875rem'
+                        padding: "1rem",
+                        background: "transparent",
+                        fontSize: "0.875rem",
                       }}
                     >
                       {JSON.stringify(normalizeResponseExample, null, 2)}
