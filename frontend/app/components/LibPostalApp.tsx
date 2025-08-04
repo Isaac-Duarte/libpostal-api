@@ -13,7 +13,7 @@ export function LibPostalApp() {
     <ThemeProvider>
       <div className="bg-background min-h-screen text-foreground">
         <Navigation />
-        <main>
+        <main className="pt-16">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
