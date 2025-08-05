@@ -1,0 +1,20 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# API endpoints - allow indexing for documentation discovery
+Allow: /api/v1/health
+Allow: /docs
+Allow: /api-docs/
+
+# Sitemaps
+Sitemap: https://libpostal.pendejo.dev/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Block common bot paths that don't add value
+Disallow: /assets/
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*.json$
