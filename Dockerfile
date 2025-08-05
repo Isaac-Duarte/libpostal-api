@@ -1,32 +1,37 @@
 # Multi-stage build for libpostal-api
-FROM rust:1.75-slim AS builder
+FROM rust:1.88.0-slim AS builder
 
-# Install system dependencies
+# Install Node.js repository and update package lists
+RUN apt-get update && apt-get install -y curl gnupg \
+    && curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
+
+# Install all dependencies (Node.js and build tools)
 RUN apt-get update && apt-get install -y \
     build-essential \
     autoconf \
     automake \
     libtool \
+    libtool-bin \
     pkg-config \
     curl \
     libcurl4-openssl-dev \
     libssl-dev \
+    nodejs \
+    git \
+    cmake \
+    clang \
+    libclang-dev \
+    llvm-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Create app directory
+# Verify libtool installation
+RUN which libtool && libtool --version
+
+# Set working directory
 WORKDIR /app
 
-# Copy dependency files
-COPY Cargo.toml Cargo.lock ./
-
-# Create a dummy main.rs to build dependencies
-RUN mkdir src && echo "fn main() {}" > src/main.rs
-
-# Build dependencies
-RUN cargo build --release && rm src/main.rs
-
-# Copy source code
-COPY src ./src
+# Copy all source files
+COPY . .
 
 # Build the application
 RUN cargo build --release
@@ -47,11 +52,12 @@ RUN useradd -r -s /bin/false app
 # Create app directory
 WORKDIR /app
 
+# Set environment variable for libpostal data directory
+ENV LIBPOSTAL_DATA_DIR=/app/data
+
 # Copy the binary from builder stage
 COPY --from=builder /app/target/release/libpostal-api /app/
-
-# Copy static files
-COPY static ./static
+COPY --from=builder /app/static /app/static
 
 # Create data directory and download libpostal data
 RUN mkdir -p data && chown -R app:app /app

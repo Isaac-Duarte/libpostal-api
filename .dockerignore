@@ -1,9 +1,62 @@
+# Build artifacts
 target/
+
+# Git files
 .git/
 .gitignore
+
+# Documentation
 *.md
-Dockerfile
+docs/
+
+# Docker files
+Dockerfile.*
 docker-compose.yml
 nginx.conf
+
+# Environment files
 .env
+.env.local
+.env.*.local
+
+# Deployment scripts and configs
+deploy-*.sh
+cloudbuild.yaml
+.gcloudignore
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Node.js (frontend build artifacts are already in static/)
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+
+# Test files
+tests/
+test/
+__tests__/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
 todo-*.md
+
+# Coverage reports
+coverage/
+*.lcov
+data/
+static/
