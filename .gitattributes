@@ -1,1 +1,9 @@
-frontend/* linguist-detectable=false
+# Ignore everything else
+*.ts linguist-detectable=false
+*.tsx linguist-detectable=false
+*.css linguist-detectable=false
+Dockerfile linguist-detectable=false
+*.sh linguist-detectable=false
+
+# Ensure Rust files are counted
+*.rs linguist-detectable=true
