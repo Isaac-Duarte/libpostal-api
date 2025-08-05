@@ -41,23 +41,23 @@ export function Navigation() {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <h1 className="text-xl font-bold text-foreground">
+              <h1 className="text-lg sm:text-xl font-bold text-foreground">
                 LibPostal API
               </h1>
             </div>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-1 sm:space-x-4 overflow-x-auto">
             <button
               onClick={() => scrollToSection("demo")}
-              className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              className="text-muted-foreground hover:text-foreground px-2 sm:px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap"
             >
               Demo
             </button>
             <button
               onClick={() => scrollToSection("docs")}
-              className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              className="text-muted-foreground hover:text-foreground px-2 sm:px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap"
             >
-              Documentation
+              Docs
             </button>
             <a
               href="https://github.com/Isaac-Duarte/libpostal-rs"
@@ -67,7 +67,7 @@ export function Navigation() {
               title="View on GitHub"
             >
               <svg
-                className="w-5 h-5"
+                className="w-4 h-4 sm:w-5 sm:h-5"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -80,14 +80,15 @@ export function Navigation() {
               size="icon"
               onClick={toggleTheme}
               title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+              className="flex-shrink-0"
             >
               {theme === "light" ? (
-                <Moon className="h-5 w-5" />
+                <Moon className="h-4 w-4 sm:h-5 sm:w-5" />
               ) : (
-                <Sun className="h-5 w-5" />
+                <Sun className="h-4 w-4 sm:h-5 sm:w-5" />
               )}
             </Button>
-            <Button asChild>
+            <Button asChild size="sm" className="text-xs sm:text-sm whitespace-nowrap">
               <a href="/docs">API Docs</a>
             </Button>
           </div>

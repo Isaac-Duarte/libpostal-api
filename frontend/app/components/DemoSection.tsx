@@ -180,7 +180,7 @@ export function DemoSection() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
           {/* Input Section */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -231,7 +231,7 @@ export function DemoSection() {
                       />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="language" className="text-foreground">
                           Language (Optional)
@@ -296,11 +296,11 @@ export function DemoSection() {
                   </TabsContent>
                 </Tabs>
 
-                <div className="flex gap-2">
+                <div className="flex flex-col sm:flex-row gap-2">
                   <Button
                     onClick={processRequest}
                     disabled={loading}
-                    className="flex-1"
+                    className="flex-1 w-full sm:w-auto"
                   >
                     {loading ? (
                       <>
@@ -315,7 +315,7 @@ export function DemoSection() {
                     variant="outline"
                     onClick={copyCurlCommand}
                     disabled={!address.trim()}
-                    className="flex-shrink-0"
+                    className="flex-shrink-0 w-full sm:w-auto"
                   >
                     {curlCopied ? (
                       <>
@@ -364,18 +364,26 @@ export function DemoSection() {
               </CardHeader>
               <CardContent>
                 <div className="bg-muted border border-border rounded-lg overflow-hidden">
-                  <SyntaxHighlighter
-                    language="json"
-                    style={theme === "dark" ? vscDarkPlus : vs}
-                    customStyle={{
-                      margin: 0,
-                      padding: "1rem",
-                      background: "transparent",
-                      fontSize: "0.875rem",
-                    }}
-                  >
-                    {JSON.stringify(response, null, 2)}
-                  </SyntaxHighlighter>
+                  <div className="overflow-x-auto max-w-full">
+                    <SyntaxHighlighter
+                      language="json"
+                      style={theme === "dark" ? vscDarkPlus : vs}
+                      customStyle={{
+                        margin: 0,
+                        padding: "1rem",
+                        background: "transparent",
+                        fontSize: "0.875rem",
+                        whiteSpace: "pre-wrap",
+                        wordWrap: "break-word",
+                        overflowWrap: "break-word",
+                        maxWidth: "100%",
+                      }}
+                      wrapLines={true}
+                      wrapLongLines={true}
+                    >
+                      {JSON.stringify(response, null, 2)}
+                    </SyntaxHighlighter>
+                  </div>
                 </div>
               </CardContent>
             </Card>

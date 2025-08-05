@@ -115,7 +115,7 @@ export function DocumentationSection() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
           {/* Parse Endpoint */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -138,18 +138,26 @@ export function DocumentationSection() {
                     Request
                   </h4>
                   <div className="bg-muted border border-border rounded-lg overflow-hidden">
-                    <SyntaxHighlighter
-                      language="json"
-                      style={theme === "dark" ? vscDarkPlus : vs}
-                      customStyle={{
-                        margin: 0,
-                        padding: "1rem",
-                        background: "transparent",
-                        fontSize: "0.875rem",
-                      }}
-                    >
-                      {JSON.stringify(parseRequestExample, null, 2)}
-                    </SyntaxHighlighter>
+                    <div className="overflow-x-auto max-w-full">
+                      <SyntaxHighlighter
+                        language="json"
+                        style={theme === "dark" ? vscDarkPlus : vs}
+                        customStyle={{
+                          margin: 0,
+                          padding: "1rem",
+                          background: "transparent",
+                          fontSize: "0.875rem",
+                          whiteSpace: "pre-wrap",
+                          wordWrap: "break-word",
+                          overflowWrap: "break-word",
+                          maxWidth: "100%",
+                        }}
+                        wrapLines={true}
+                        wrapLongLines={true}
+                      >
+                        {JSON.stringify(parseRequestExample, null, 2)}
+                      </SyntaxHighlighter>
+                    </div>
                   </div>
                 </div>
 
@@ -173,18 +181,26 @@ export function DocumentationSection() {
                     </Button>
                   </div>
                   <div className="bg-muted border border-border rounded-lg overflow-hidden">
-                    <SyntaxHighlighter
-                      language="bash"
-                      style={theme === "dark" ? vscDarkPlus : vs}
-                      customStyle={{
-                        margin: 0,
-                        padding: "1rem",
-                        background: "transparent",
-                        fontSize: "0.875rem",
-                      }}
-                    >
-                      {parseCurlExample}
-                    </SyntaxHighlighter>
+                    <div className="overflow-x-auto max-w-full">
+                      <SyntaxHighlighter
+                        language="bash"
+                        style={theme === "dark" ? vscDarkPlus : vs}
+                        customStyle={{
+                          margin: 0,
+                          padding: "1rem",
+                          background: "transparent",
+                          fontSize: "0.875rem",
+                          whiteSpace: "pre-wrap",
+                          wordWrap: "break-word",
+                          overflowWrap: "break-word",
+                          maxWidth: "100%",
+                        }}
+                        wrapLines={true}
+                        wrapLongLines={true}
+                      >
+                        {parseCurlExample}
+                      </SyntaxHighlighter>
+                    </div>
                   </div>
                 </div>
 
@@ -193,18 +209,26 @@ export function DocumentationSection() {
                     Response:
                   </h4>
                   <div className="bg-muted border border-border rounded-lg overflow-hidden">
-                    <SyntaxHighlighter
-                      language="json"
-                      style={theme === "dark" ? vscDarkPlus : vs}
-                      customStyle={{
-                        margin: 0,
-                        padding: "1rem",
-                        background: "transparent",
-                        fontSize: "0.875rem",
-                      }}
-                    >
-                      {JSON.stringify(parseResponseExample, null, 2)}
-                    </SyntaxHighlighter>
+                    <div className="overflow-x-auto max-w-full">
+                      <SyntaxHighlighter
+                        language="json"
+                        style={theme === "dark" ? vscDarkPlus : vs}
+                        customStyle={{
+                          margin: 0,
+                          padding: "1rem",
+                          background: "transparent",
+                          fontSize: "0.875rem",
+                          whiteSpace: "pre-wrap",
+                          wordWrap: "break-word",
+                          overflowWrap: "break-word",
+                          maxWidth: "100%",
+                        }}
+                        wrapLines={true}
+                        wrapLongLines={true}
+                      >
+                        {JSON.stringify(parseResponseExample, null, 2)}
+                      </SyntaxHighlighter>
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -233,18 +257,26 @@ export function DocumentationSection() {
                     Request Body:
                   </h4>
                   <div className="bg-muted border border-border rounded-lg overflow-hidden">
-                    <SyntaxHighlighter
-                      language="json"
-                      style={theme === "dark" ? vscDarkPlus : vs}
-                      customStyle={{
-                        margin: 0,
-                        padding: "1rem",
-                        background: "transparent",
-                        fontSize: "0.875rem",
-                      }}
-                    >
-                      {JSON.stringify(normalizeRequestExample, null, 2)}
-                    </SyntaxHighlighter>
+                    <div className="overflow-x-auto max-w-full">
+                      <SyntaxHighlighter
+                        language="json"
+                        style={theme === "dark" ? vscDarkPlus : vs}
+                        customStyle={{
+                          margin: 0,
+                          padding: "1rem",
+                          background: "transparent",
+                          fontSize: "0.875rem",
+                          whiteSpace: "pre-wrap",
+                          wordWrap: "break-word",
+                          overflowWrap: "break-word",
+                          maxWidth: "100%",
+                        }}
+                        wrapLines={true}
+                        wrapLongLines={true}
+                      >
+                        {JSON.stringify(normalizeRequestExample, null, 2)}
+                      </SyntaxHighlighter>
+                    </div>
                   </div>
                 </div>
 
@@ -268,18 +300,26 @@ export function DocumentationSection() {
                     </Button>
                   </div>
                   <div className="bg-muted border border-border rounded-lg overflow-hidden">
-                    <SyntaxHighlighter
-                      language="bash"
-                      style={theme === "dark" ? vscDarkPlus : vs}
-                      customStyle={{
-                        margin: 0,
-                        padding: "1rem",
-                        background: "transparent",
-                        fontSize: "0.875rem",
-                      }}
-                    >
-                      {normalizeCurlExample}
-                    </SyntaxHighlighter>
+                    <div className="overflow-x-auto max-w-full">
+                      <SyntaxHighlighter
+                        language="bash"
+                        style={theme === "dark" ? vscDarkPlus : vs}
+                        customStyle={{
+                          margin: 0,
+                          padding: "1rem",
+                          background: "transparent",
+                          fontSize: "0.875rem",
+                          whiteSpace: "pre-wrap",
+                          wordWrap: "break-word",
+                          overflowWrap: "break-word",
+                          maxWidth: "100%",
+                        }}
+                        wrapLines={true}
+                        wrapLongLines={true}
+                      >
+                        {normalizeCurlExample}
+                      </SyntaxHighlighter>
+                    </div>
                   </div>
                 </div>
 
@@ -288,18 +328,26 @@ export function DocumentationSection() {
                     Response:
                   </h4>
                   <div className="bg-muted border border-border rounded-lg overflow-hidden">
-                    <SyntaxHighlighter
-                      language="json"
-                      style={theme === "dark" ? vscDarkPlus : vs}
-                      customStyle={{
-                        margin: 0,
-                        padding: "1rem",
-                        background: "transparent",
-                        fontSize: "0.875rem",
-                      }}
-                    >
-                      {JSON.stringify(normalizeResponseExample, null, 2)}
-                    </SyntaxHighlighter>
+                    <div className="overflow-x-auto max-w-full">
+                      <SyntaxHighlighter
+                        language="json"
+                        style={theme === "dark" ? vscDarkPlus : vs}
+                        customStyle={{
+                          margin: 0,
+                          padding: "1rem",
+                          background: "transparent",
+                          fontSize: "0.875rem",
+                          whiteSpace: "pre-wrap",
+                          wordWrap: "break-word",
+                          overflowWrap: "break-word",
+                          maxWidth: "100%",
+                        }}
+                        wrapLines={true}
+                        wrapLongLines={true}
+                      >
+                        {JSON.stringify(normalizeResponseExample, null, 2)}
+                      </SyntaxHighlighter>
+                    </div>
                   </div>
                 </div>
               </CardContent>

@@ -48,11 +48,11 @@ export function HeroSection() {
               variant="outline"
               size="lg"
               onClick={() => scrollToSection("demo")}
-              className="glass-effect"
+              className="glass-effect w-full sm:w-auto"
             >
               Try the Demo
             </Button>
-            <Button size="lg" onClick={() => scrollToSection("docs")}>
+            <Button size="lg" onClick={() => scrollToSection("docs")} className="w-full sm:w-auto">
               View API Docs
             </Button>
           </motion.div>
