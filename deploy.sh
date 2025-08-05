@@ -55,6 +55,7 @@ gcloud run deploy libpostal-api \
     --timeout=900 \
     --allow-unauthenticated \
     --set-env-vars=RUST_LOG=info \
+    --port=3000 \
     --execution-environment=gen2
 
 log_info "Deployment completed! 🚀"
